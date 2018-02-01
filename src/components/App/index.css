@@ -1,0 +1,11 @@
+@import "~antd/dist/antd.css";
+
+.App {
+  margin: 32px;
+}
+.title {
+  margin: 0 0 32px 48px;
+  padding-bottom: 8px;
+  font-size: 22px;
+  border-bottom: 1px solid rgb(194, 191, 191);
+}
