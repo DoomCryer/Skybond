@@ -1,3 +1,12 @@
+.root {
+  position: relative;
+}
 .radio {
   margin-left: 48px !important;
+}
+.select {
+  width: 100px;
+  position: absolute !important;
+  bottom: 64px;
+  left: 620px;
 }

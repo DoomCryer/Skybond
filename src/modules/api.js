@@ -16,6 +16,8 @@ const allData = [
   { date: "02-03-2017", price: 35.5, yield: 100, spread: 999.44 }
 ];
 
+const convertDate = date => moment(date, "DD-MM-YYYY").format("DD.MM");
+
 const getBondData = (bondId, date, depth, type) => {
   // Если брать данные с реального сервера, надо расчитать дату начала выборки
   // const endDate = moment(date, "DD-MM-YYYY");
@@ -29,25 +31,38 @@ const getBondData = (bondId, date, depth, type) => {
   //     break;
   //     ...
   //
-  console.log(depth);
 
   let data, result;
   switch (depth) {
     case "week":
-      data = allData.slice(9, 12);
+      data = allData.slice(9, 12).map(item => ({
+        ...item,
+        date: convertDate(item.date)
+      }));
       break;
     case "month":
-      data = allData.slice(3, 12);
+      data = allData.slice(3, 12).map(item => ({
+        ...item,
+        date: convertDate(item.date)
+      }));
       break;
     case "quarter":
-      data = allData.slice(2, 12);
+      data = allData.slice(2, 12).map(item => ({
+        ...item,
+        date: convertDate(item.date)
+      }));
       break;
     case "year":
-      data = allData.slice(1, 12);
+      data = allData.slice(1, 12).map(item => ({
+        ...item,
+        date: convertDate(item.date)
+      }));
       break;
     case "max":
       data = allData;
       break;
+    default:
+      data = allData;
   }
 
   switch (type) {
@@ -60,8 +75,9 @@ const getBondData = (bondId, date, depth, type) => {
     case "spread":
       result = data.map(item => ({ x: item.date, y: item.spread }));
       break;
+    default:
+      result = data.map(item => ({ x: item.date, y: item.price }));
   }
-  console.log("Result ", result);
 
   return result;
 };
